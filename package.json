@@ -1,0 +1,39 @@
+{
+  "name": "cpkgupdate",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Helper for composer package updates",
+  "main": "index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kristaps777/composer-package-updater.git"
+  },
+  "keywords": [
+    "dev"
+  ],
+  "author": "di.kristapsv",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kristaps777/composer-package-updater/issues"
+  },
+  "homepage": "https://github.com/kristaps777/composer-package-updater#readme",
+  "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/fs-extra": "^11.0.4",
+    "@types/node": "^25.9.3",
+    "eslint": "^10.5.0",
+    "prettier": "^3.8.4",
+    "tsx": "^4.22.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.61.1"
+  },
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "fs-extra": "^11.3.5"
+  }
+}
