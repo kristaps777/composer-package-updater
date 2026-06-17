@@ -21,7 +21,11 @@ export const executor = (): Executor => {
         return git.createBranch(projectPath, branchName);
     };
 
-    const gitCommit = (projectPath: string, message: string): void => {
+    const gitDeleteBranch = (projectPath: string, branchName: string): void => {
+        return git.deleteBranch(projectPath, branchName);
+    };
+
+    const gitCommit = (projectPath: string, message: string): boolean => {
         return git.commit(projectPath, message);
     };
 
@@ -34,6 +38,7 @@ export const executor = (): Executor => {
         composerUpdate,
         gitCheckoutMain,
         gitCreateBranch,
+        gitDeleteBranch,
         gitCommit,
         gitPush,
     };
@@ -44,6 +49,7 @@ export interface Executor {
     composerUpdate: (projectPath: string, packageSet: Set<string>) => void;
     gitCheckoutMain: (projectPath: string) => void;
     gitCreateBranch: (projectPath: string, branchName: string) => void;
-    gitCommit: (projectPath: string, message: string) => void;
+    gitDeleteBranch: (projectPath: string, branchName: string) => void;
+    gitCommit: (projectPath: string, message: string) => boolean;
     gitPush: (projectPath: string, branch: string) => void;
 }

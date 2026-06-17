@@ -45,6 +45,15 @@ export const gitExec = (): Git => {
         });
     };
 
+    const deleteBranch = (projectPath: string, branchName: string): void => {
+        const deleteCommand: string = strings.sprintf(config.git.deleteBranch, branchName);
+        checkout(projectPath);
+        execSync(deleteCommand, {
+            cwd: projectPath,
+            stdio: 'inherit'
+        });
+    };
+
     const diff = (projectPath: string): string => {
         try {
             return execSync(config.git.diff, {
@@ -56,17 +65,20 @@ export const gitExec = (): Git => {
         }
     };
 
-    const commit = (projectPath: string, message: string): void => {
+    const commit = (projectPath: string, message: string): boolean => {
         const commitCommand: string = strings.sprintf(config.git.commit, message);
         if (!hasChanges(projectPath)) {
             console.log(chalk.yellow('No changes to commit'));
-            return;
+
+            return false;
         }
 
         execSync(commitCommand, {
             cwd: projectPath,
             stdio: 'inherit',
         });
+
+        return true;
     };
 
     const hasChanges = (projectPath: string): boolean => {
@@ -75,6 +87,8 @@ export const gitExec = (): Git => {
                 cwd: projectPath,
                 encoding: 'utf8',
             });
+            console.log('to be comitted', output)
+
             return output.trim().length > 0;
         } catch {
             return false;
@@ -83,11 +97,6 @@ export const gitExec = (): Git => {
 
     const push = (projectPath: string, branch: string): void => {
         const pushCommand: string = strings.sprintf(config.git.push, branch);
-        if (!hasChanges(projectPath)) {
-            console.log(chalk.yellow('No changes to push'));
-            return;
-        }
-
         execSync(pushCommand, {
             cwd: projectPath,
             stdio: 'inherit'
@@ -97,6 +106,7 @@ export const gitExec = (): Git => {
     return {
         checkout,
         createBranch,
+        deleteBranch,
         diff,
         commit,
         push,
@@ -106,7 +116,8 @@ export const gitExec = (): Git => {
 export interface Git {
     checkout: (projectPath: string, branch?: string) => void;
     createBranch: (projectPath: string, branchName: string, baseBranch?: string) => void;
+    deleteBranch: (projectPath: string, branchName: string) => void;
     diff: (projectPath: string) => string;
-    commit: (projectPath: string, message: string) => void;
+    commit: (projectPath: string, message: string) => boolean;
     push: (projectPath: string, branch: string) => void;
 }

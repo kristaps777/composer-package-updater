@@ -23,6 +23,7 @@ export interface GitCommands {
     checkout: string;
     commit: string;
     createBranch: string;
+    deleteBranch: string;
     diff: string;
     fetchOrigin: string;
     reset: string;
@@ -63,6 +64,7 @@ export const config: Configuration = {
     git: {
         checkout: 'git checkout',
         createBranch: 'git checkout -b %s',
+        deleteBranch: 'git branch -d %s',
         commit: 'git commit -a -m "%s"',
         diff: 'git diff --stat',
         fetchOrigin: 'git fetch origin',

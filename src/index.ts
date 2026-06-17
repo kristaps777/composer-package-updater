@@ -40,8 +40,12 @@ async function main() {
                     const commitMessage: string = 'Updated packages ' + Array.from(unique).join(' ');
                     // execute commands in order - composer update, git commit, git push
                     execute.composerUpdate(projectCwd, unique);
-                    execute.gitCommit(projectCwd, commitMessage);
-                    execute.gitPush(projectCwd, branchName);
+                    const commited: boolean = execute.gitCommit(projectCwd, commitMessage);
+                    if (commited) {
+                        execute.gitPush(projectCwd, branchName);
+                    } else {
+                        execute.gitDeleteBranch(projectCwd, branchName);
+                    }
                 }
             }
         }
