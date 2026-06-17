@@ -50,7 +50,7 @@ export const gitExec = (): Git => {
         checkout(projectPath);
         execSync(deleteCommand, {
             cwd: projectPath,
-            stdio: 'inherit'
+            stdio: 'inherit',
         });
     };
 
@@ -87,7 +87,6 @@ export const gitExec = (): Git => {
                 cwd: projectPath,
                 encoding: 'utf8',
             });
-            console.log('to be comitted', output)
 
             return output.trim().length > 0;
         } catch {
@@ -99,7 +98,7 @@ export const gitExec = (): Git => {
         const pushCommand: string = strings.sprintf(config.git.push, branch);
         execSync(pushCommand, {
             cwd: projectPath,
-            stdio: 'inherit'
+            stdio: 'inherit',
         });
     };
 

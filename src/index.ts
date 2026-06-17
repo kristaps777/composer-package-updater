@@ -2,7 +2,7 @@ import { directories, type DirectoryScan } from './directory.scan.js';
 import { prompter, type Prompter } from './prompter.js';
 import { type Branch, branch } from './branch.js';
 import { executor, type Executor } from './executor.js';
-import {type ComposerOutput, config} from './config.js';
+import { type ComposerOutput, config } from './config.js';
 import chalk from 'chalk';
 
 async function main() {
