@@ -5,6 +5,14 @@ export default tseslint.config(
     eslint.configs.recommended,
     ...tseslint.configs.recommended,
     {
+        languageOptions: {
+            globals: {
+                process: 'readonly',
+                console: 'readonly',
+                __dirname: 'readonly',
+                __filename: 'readonly',
+            }
+        },
         ignores: [
             'dist/',
             'node_modules/',

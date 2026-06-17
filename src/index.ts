@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import { directories, type DirectoryScan } from './directory.scan.js';
 import { prompter, type Prompter } from './prompter.js';
 import { type Branch, branch } from './branch.js';
@@ -59,4 +60,17 @@ async function main() {
     }
 }
 
+function validateEnv(): void {
+    const envIsIncomplete: boolean = [
+        process.env.PROJECTS_ROOT,
+        process.env.GET_PROJECT_PROMPT,
+        process.env.GET_TICKET_PROMPT,
+    ].some((p) => p === '');
+    if (envIsIncomplete) {
+        console.log(chalk.red('Your .env is incomplete!'));
+        process.exit(1);
+    }
+}
+
+validateEnv();
 main().then();
