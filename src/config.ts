@@ -26,7 +26,7 @@ export interface GitCommands {
 
 export interface ComposerOutput {
     advisories: {
-        [packageName: string]: Advisory
+        [packageName: string]: Advisory;
     };
     abandoned: string[];
 }
@@ -36,7 +36,7 @@ export interface Advisory {
     packageName: string;
     affectedVersions: string;
     title: string;
-    cve: null|string;
+    cve: null | string;
     link: string;
     reportedAt: string;
     sources: any[];
@@ -62,5 +62,5 @@ export const config: Configuration = {
         reset: 'git reset --hard origin/%s',
         showRef: 'git show-ref --verify --quiet refs/heads/%s',
         status: 'git status --porcelain',
-    }
-}
+    },
+};

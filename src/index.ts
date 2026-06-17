@@ -1,9 +1,8 @@
-import {directories, type DirectoryScan} from './directory.scan.js';
-import {prompter, type Prompter} from './prompter.js';
-import {type Branch, branch} from './branch.js';
-import {executor, type Executor} from './executor.js';
-import type {ComposerOutput} from './config.js';
-
+import { directories, type DirectoryScan } from './directory.scan.js';
+import { prompter, type Prompter } from './prompter.js';
+import { type Branch, branch } from './branch.js';
+import { executor, type Executor } from './executor.js';
+import type { ComposerOutput } from './config.js';
 
 async function main() {
     const scan: DirectoryScan = directories();
@@ -33,7 +32,7 @@ async function main() {
                 }
             }
         }
-        console.log('Exiting...')
+        console.log('Exiting...');
         process.exit(0);
     } else {
         console.log('Invalid selection!');

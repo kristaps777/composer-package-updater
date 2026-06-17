@@ -11,20 +11,20 @@ export const directories = (): DirectoryScan => {
         return [
             {
                 dir: path.join(ProjectsRoot, projectDirectory),
-                composerPath: path.join(ProjectsRoot, projectDirectory, config.composerJson)
+                composerPath: path.join(ProjectsRoot, projectDirectory, config.composerJson),
             },
             {
                 dir: path.join(ProjectsRoot, projectDirectory, config.webRoot),
-                composerPath: path.join(ProjectsRoot, projectDirectory, config.webRoot, config.composerJson)
-            }
+                composerPath: path.join(ProjectsRoot, projectDirectory, config.webRoot, config.composerJson),
+            },
         ];
-    }
+    };
 
     const hasComposerJson = async (projectDirectory: string): Promise<boolean> => {
         const paths = getProjectPaths(projectDirectory);
-        const results = await Promise.all(paths.map(p => fsExtra.pathExists(p.composerPath)));
-        return results.some(exists => exists);
-    }
+        const results = await Promise.all(paths.map((p) => fsExtra.pathExists(p.composerPath)));
+        return results.some((exists) => exists);
+    };
 
     const findComposerDirectory = async (projectDirectory: string): Promise<string | null> => {
         const paths = getProjectPaths(projectDirectory);
@@ -34,21 +34,19 @@ export const directories = (): DirectoryScan => {
             }
         }
         return null;
-    }
+    };
 
     const all = async (): Promise<string[]> => {
         const allProjects = await fsExtra.readdir(ProjectsRoot);
-        const hasComposerResults = await Promise.all(
-            allProjects.map(project => hasComposerJson(project))
-        );
+        const hasComposerResults = await Promise.all(allProjects.map((project) => hasComposerJson(project)));
         return allProjects.filter((_, index) => hasComposerResults[index]);
-    }
+    };
 
     const ls = (values: string[]): void => {
         values.forEach((dir, index) => {
             console.log(`${index + 1}. ${dir}`);
         });
-    }
+    };
 
     const cd = async (projectName: string): Promise<void> => {
         const dirToNavigate = await findComposerDirectory(projectName);
@@ -59,7 +57,7 @@ export const directories = (): DirectoryScan => {
 
         chdir(dirToNavigate);
         console.log(`\nMoved to: ${cwd()}`);
-    }
+    };
 
     const dir = async (projectName: string): Promise<string> => {
         const dirToNavigate = await findComposerDirectory(projectName);
@@ -68,15 +66,15 @@ export const directories = (): DirectoryScan => {
         }
 
         return dirToNavigate;
-    }
+    };
 
     return {
         all,
         ls,
         cd,
         dir,
-    }
-}
+    };
+};
 
 export interface DirectoryScan {
     all: () => Promise<string[]>;

@@ -1,12 +1,12 @@
-import {type ComposerOutput} from './config.js';
-import {type Composer, composerExec} from './composer.js';
-import {type Git, gitExec} from './git.js';
+import { type ComposerOutput } from './config.js';
+import { type Composer, composerExec } from './composer.js';
+import { type Git, gitExec } from './git.js';
 
 export const executor = (): Executor => {
     const composer: Composer = composerExec();
     const git: Git = gitExec();
     const composerAudit = (projectPath: string): ComposerOutput | undefined => {
-       return composer.audit(projectPath);
+        return composer.audit(projectPath);
     };
 
     const composerUpdate = (projectPath: string, packageSet: Set<string>) => {

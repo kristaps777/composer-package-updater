@@ -1,7 +1,7 @@
 import 'dotenv/config';
-import {config} from './config.js';
-import {execSync} from 'child_process';
-import {stringify, type Stringify} from './strings.js';
+import { config } from './config.js';
+import { execSync } from 'child_process';
+import { stringify, type Stringify } from './strings.js';
 
 export const gitExec = (): Git => {
     const strings: Stringify = stringify();
@@ -18,13 +18,13 @@ export const gitExec = (): Git => {
         const createCommand: string = strings.sprintf(config.git.createBranch, branchName);
         execSync(config.git.fetchOrigin, {
             cwd: projectPath,
-            stdio: 'inherit'
+            stdio: 'inherit',
         });
         let branchExists: boolean = true;
         try {
             execSync(showRefCommand, {
                 cwd: projectPath,
-                stdio: 'ignore'
+                stdio: 'ignore',
             });
         } catch {
             branchExists = false;
@@ -36,11 +36,11 @@ export const gitExec = (): Git => {
         checkout(projectPath, baseBranch);
         execSync(resetCommand, {
             cwd: projectPath,
-            stdio: 'inherit'
+            stdio: 'inherit',
         });
         execSync(createCommand, {
             cwd: projectPath,
-            stdio: 'inherit'
+            stdio: 'inherit',
         });
     };
 
@@ -48,7 +48,7 @@ export const gitExec = (): Git => {
         try {
             return execSync(config.git.diff, {
                 cwd: projectPath,
-                encoding: 'utf8'
+                encoding: 'utf8',
             });
         } catch (error) {
             return '';
@@ -64,7 +64,7 @@ export const gitExec = (): Git => {
 
         execSync(commitCommand, {
             cwd: projectPath,
-            stdio: 'inherit'
+            stdio: 'inherit',
         });
     };
 
@@ -72,7 +72,7 @@ export const gitExec = (): Git => {
         try {
             const output = execSync(config.git.status, {
                 cwd: projectPath,
-                encoding: 'utf8'
+                encoding: 'utf8',
             });
             return output.trim().length > 0;
         } catch {
