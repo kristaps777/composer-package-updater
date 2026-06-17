@@ -38,7 +38,9 @@ async function main() {
                     brancher.create(projectCwd, branchName);
                     // get unique packages, there can be multiple CVE's for the same package
                     const unique = new Set(packagesToUpdate);
-                    const packageList = Array.from(unique).map(pkg => `- ${pkg}`).join('\n');
+                    const packageList = Array.from(unique)
+                        .map((pkg) => `- ${pkg}`)
+                        .join('\n');
                     const commitMessage = `Update composer packages:\n${packageList}`;
                     // execute commands in order - composer update, git commit, git push
                     execute.composerUpdate(projectCwd, unique);

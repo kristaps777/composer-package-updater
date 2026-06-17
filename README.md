@@ -1,2 +1,15 @@
-# composer-package-updater
-Helper tool for semi-automated update of vulnerable packages
+# Composer Package Updater
+
+A CLI tool to audit and update Composer packages.
+
+## Installation
+
+```bash
+npm install
+```
+
+## Usage
+
+```bash
+npm run start
+```
