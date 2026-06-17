@@ -3,6 +3,7 @@ import fsExtra from 'fs-extra';
 import { config } from './config.js';
 import path from 'path';
 import { chdir, cwd } from 'node:process';
+import chalk from 'chalk';
 
 export const directories = (): DirectoryScan => {
     const ProjectsRoot: string = config.projectsRoot;
@@ -44,7 +45,9 @@ export const directories = (): DirectoryScan => {
 
     const ls = (values: string[]): void => {
         values.forEach((dir, index) => {
-            console.log(`${index + 1}. ${dir}`);
+            const id: string = chalk.yellow(`[${index + 1}]`);
+            const name: string = chalk.green(`[ ${dir} ]`);
+            console.log(`${id} ${name}`);
         });
     };
 

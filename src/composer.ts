@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import { type ComposerOutput, config } from './config.js';
 import { execSync } from 'child_process';
+import chalk from 'chalk';
 
 export const composerExec = (): Composer => {
     const audit = (projectPath: string): ComposerOutput | undefined => {
@@ -37,7 +38,7 @@ export const composerExec = (): Composer => {
                 stdio: 'inherit',
             });
         } catch (error: any) {
-            console.error('Composer update failed:', error.message);
+            console.error(chalk.red(error.message));
         }
     };
 

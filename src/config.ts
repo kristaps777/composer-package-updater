@@ -6,6 +6,12 @@ export interface Configuration {
     branchStub: string;
     composer: ComposerCommands;
     git: GitCommands;
+    prompts: Prompts;
+}
+
+export interface Prompts {
+    getProject: string;
+    getTicket: string;
 }
 
 export interface ComposerCommands {
@@ -21,6 +27,7 @@ export interface GitCommands {
     fetchOrigin: string;
     reset: string;
     showRef: string;
+    push: string;
     status: string;
 }
 
@@ -61,6 +68,11 @@ export const config: Configuration = {
         fetchOrigin: 'git fetch origin',
         reset: 'git reset --hard origin/%s',
         showRef: 'git show-ref --verify --quiet refs/heads/%s',
+        push: 'git push -u origin %s',
         status: 'git status --porcelain',
+    },
+    prompts: {
+        getProject: process.env.GET_PROJECT_PROMPT || '',
+        getTicket: process.env.GET_TICKET_PROMPT || '',
     },
 };

@@ -25,12 +25,17 @@ export const executor = (): Executor => {
         return git.commit(projectPath, message);
     };
 
+    const gitPush = (projectPath: string, branch: string): void => {
+        return git.push(projectPath, branch);
+    };
+
     return {
         composerAudit,
         composerUpdate,
         gitCheckoutMain,
         gitCreateBranch,
         gitCommit,
+        gitPush,
     };
 };
 
@@ -40,4 +45,5 @@ export interface Executor {
     gitCheckoutMain: (projectPath: string) => void;
     gitCreateBranch: (projectPath: string, branchName: string) => void;
     gitCommit: (projectPath: string, message: string) => void;
+    gitPush: (projectPath: string, branch: string) => void;
 }

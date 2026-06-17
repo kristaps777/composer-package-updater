@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { config } from './config.js';
 import { execSync } from 'child_process';
 import { stringify, type Stringify } from './strings.js';
+import chalk from 'chalk';
 
 export const gitExec = (): Git => {
     const strings: Stringify = stringify();
@@ -58,7 +59,7 @@ export const gitExec = (): Git => {
     const commit = (projectPath: string, message: string): void => {
         const commitCommand: string = strings.sprintf(config.git.commit, message);
         if (!hasChanges(projectPath)) {
-            console.log('No changes to commit');
+            console.log(chalk.yellow('No changes to commit'));
             return;
         }
 
@@ -80,11 +81,25 @@ export const gitExec = (): Git => {
         }
     };
 
+    const push = (projectPath: string, branch: string): void => {
+        const pushCommand: string = strings.sprintf(config.git.push, branch);
+        if (!hasChanges(projectPath)) {
+            console.log(chalk.yellow('No changes to push'));
+            return;
+        }
+
+        execSync(pushCommand, {
+            cwd: projectPath,
+            stdio: 'inherit'
+        });
+    };
+
     return {
         checkout,
         createBranch,
         diff,
         commit,
+        push,
     };
 };
 
@@ -93,4 +108,5 @@ export interface Git {
     createBranch: (projectPath: string, branchName: string, baseBranch?: string) => void;
     diff: (projectPath: string) => string;
     commit: (projectPath: string, message: string) => void;
+    push: (projectPath: string, branch: string) => void;
 }
