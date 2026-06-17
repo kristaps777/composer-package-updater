@@ -8,7 +8,8 @@
     "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
-    "format": "prettier --write src/ --log-level silent"
+    "format": "prettier --write src/ --log-level silent",
+    "lint": "eslint"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/kristaps777/composer-package-updater#readme",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/dotenv": "^6.1.1",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^25.9.3",

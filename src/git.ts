@@ -50,7 +50,7 @@ export const gitExec = (): Git => {
                 cwd: projectPath,
                 encoding: 'utf8',
             });
-        } catch (error) {
+        } catch {
             return '';
         }
     };
